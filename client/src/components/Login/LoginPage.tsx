@@ -8,6 +8,8 @@ const LoginPage = () => {
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
   type CredentialsType = { username: string; password: string };
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertType, setAlertType] = useState("");
   const [credentials, setCredentials] = useState<CredentialsType>({
     username: "",
     password: "",
@@ -21,6 +23,8 @@ const LoginPage = () => {
   };
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    setAlertType("info");
+    setAlertMessage("Logging in...");
     // try logging in with credentials
     const status = await login(credentials.username, credentials.password);
     if (status.successful) {
@@ -28,7 +32,8 @@ const LoginPage = () => {
       navigate("/bookshelf");
     } else {
       // login was not successful - display an error message
-      alert(status.message);
+      setAlertType("danger");
+      setAlertMessage(status.message);
     }
   };
 
@@ -59,6 +64,9 @@ const LoginPage = () => {
           fill in correct info
         </button>
         <button type="submit">Login</button>
+        {alertMessage && (
+          <div className={`alert alert-${alertType}`}>{alertMessage}</div>
+        )}
       </form>
     </div>
   );
