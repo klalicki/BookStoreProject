@@ -20,7 +20,7 @@ export const AuthProvider = (props: PropsWithChildren) => {
   const login = async (username: string, password: string) => {
     console.log("login function");
     try {
-      const data = await axios.post("http://localhost:3001/api/signin", {
+      const data = await axios.post("/api/signin", {
         username: username,
         password: password,
       });
