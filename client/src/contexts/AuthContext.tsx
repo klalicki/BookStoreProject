@@ -1,4 +1,6 @@
+import axios from "axios";
 import { PropsWithChildren, createContext, useState } from "react";
+
 type AuthContextType = {
   token?: string;
   login?: Function;
@@ -11,7 +13,21 @@ export const AuthProvider = (props: PropsWithChildren) => {
   // state to hold auth token
   const [token, setToken] = useState("");
   // login function - takes a username and password, and attempts to log in to the backend
-  const login = (username: string, password: string) => {};
+  const login = async (username: string, password: string) => {
+    try {
+      const data = await axios.post("http://localhost:3001/api/signin", {
+        username: username,
+        password: password,
+      });
+      if (!data.data.token) {
+        throw Error(
+          "the server did not return a token; something might be wrong with the server!"
+        );
+      } else {
+        setToken(data.data.token);
+      }
+    } catch {}
+  };
   // logout function - clears the auth token
   const logout = () => {};
 
