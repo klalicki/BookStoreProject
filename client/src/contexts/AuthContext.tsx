@@ -1,10 +1,14 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { PropsWithChildren, createContext, useState } from "react";
 
 type AuthContextType = {
   token: string;
   login: Function;
   logout: Function;
+};
+type loginReturnType = {
+  successful: boolean;
+  message: string;
 };
 const defaultAuthContext: AuthContextType = {
   token: "",
@@ -25,13 +29,22 @@ export const AuthProvider = (props: PropsWithChildren) => {
         password: password,
       });
       if (!data.data.token) {
-        throw Error(
-          "the server did not return a token; something might be wrong with the server!"
-        );
+        return {
+          successful: false,
+          message:
+            "the server did not return a token; something is probably wrong with the server.",
+        };
       } else {
         setToken(data.data.token);
+        return { successful: true, message: "success" };
       }
-    } catch {}
+    } catch (error: AxiosError | any) {
+      if (!error.message) {
+        return { successful: false, message: "unspecified error" };
+      } else {
+        return { successful: false, message: error.message };
+      }
+    }
   };
   // logout function - clears the auth token
   const logout = () => {};

@@ -1,13 +1,15 @@
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, FormEvent } from "react";
 import { useState } from "react";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const { login } = useContext(AuthContext);
+  const navigate = useNavigate();
   type CredentialsType = { username: string; password: string };
   const [credentials, setCredentials] = useState<CredentialsType>({
-    username: "sss",
+    username: "",
     password: "",
   });
 
@@ -17,10 +19,17 @@ const LoginPage = () => {
       [event.target.name]: event.target.value,
     });
   };
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     // try logging in with credentials
-    login(credentials.username, credentials.password);
+    const status = await login(credentials.username, credentials.password);
+    if (status.successful) {
+      // login was a success, open bookshelf page
+      navigate("/bookshelf");
+    } else {
+      // login was not successful - display an error message
+      alert(status.message);
+    }
   };
 
   return (
@@ -41,6 +50,14 @@ const LoginPage = () => {
           name="password"
           value={credentials.password}
         />
+        <button
+          onClick={(e: FormEvent) => {
+            e.preventDefault();
+            setCredentials({ username: "harry", password: "potter" });
+          }}
+        >
+          fill in correct info
+        </button>
         <button type="submit">Login</button>
       </form>
     </div>
