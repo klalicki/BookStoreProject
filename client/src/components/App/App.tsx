@@ -3,10 +3,15 @@ import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import LoginPage from "../Login/LoginPage";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import Book from "../Book/Book";
+import ErrorPage from "../ErrorPage/ErrorPage";
+import LogoutButton from "../LogoutButton/LogoutButton";
 function App() {
   return (
     <div className="App">
-      <header></header>
+      <header>
+        <LogoutButton />
+      </header>
       <main>
         <Routes>
           <Route
@@ -18,8 +23,16 @@ function App() {
             }
           />
           <Route path="/" element={<LoginPage />} />
-          <Route path="/book/:bookID" element={<h2>book</h2>} />
-          <Route path="/search" element={<h2>Search</h2>} />
+          <Route
+            path="/book/:bookID"
+            element={
+              <ProtectedRoute>
+                <Book />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/search" element={<ProtectedRoute></ProtectedRoute>} />
+          <Route path="*" element={<ErrorPage />} />
         </Routes>
       </main>
       <footer></footer>

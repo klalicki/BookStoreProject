@@ -19,7 +19,13 @@ export const AuthContext = createContext(defaultAuthContext);
 
 export const AuthProvider = (props: PropsWithChildren) => {
   // state to hold auth token
-  const [token, setToken] = useState("");
+  const lsToken = localStorage.getItem("token");
+  let startingToken = "";
+  if (lsToken) {
+    startingToken = lsToken;
+  }
+
+  const [token, setToken] = useState(startingToken);
   // login function - takes a username and password, and attempts to log in to the backend
   const login = async (username: string, password: string) => {
     console.log("login function");
@@ -36,6 +42,7 @@ export const AuthProvider = (props: PropsWithChildren) => {
         };
       } else {
         setToken(data.data.token);
+        localStorage.setItem("token", data.data.token);
         return { successful: true, message: "success" };
       }
     } catch (error: AxiosError | any) {
