@@ -2,10 +2,10 @@ import React, { ChangeEvent, FormEvent } from "react";
 import { useState } from "react";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 
 const LoginPage = () => {
-  const { login } = useContext(AuthContext);
+  const { login, token } = useContext(AuthContext);
   const navigate = useNavigate();
   type CredentialsType = { username: string; password: string };
   const [alertMessage, setAlertMessage] = useState("");
@@ -36,39 +36,42 @@ const LoginPage = () => {
       setAlertMessage(status.message);
     }
   };
-
-  return (
-    <div>
-      <h2>LOGIN PAGE</h2>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="username">Username</label>
-        <input
-          onChange={handleInputChange}
-          name="username"
-          type="text"
-          value={credentials.username}
-        />
-        <label htmlFor="password">Password</label>
-        <input
-          onChange={handleInputChange}
-          type="password"
-          name="password"
-          value={credentials.password}
-        />
-        <button
-          onClick={(e: FormEvent) => {
-            e.preventDefault();
-            setCredentials({ username: "harry", password: "potter" });
-          }}
-        >
-          fill in correct info
-        </button>
-        <button type="submit">Login</button>
-        {alertMessage && (
-          <div className={`alert alert-${alertType}`}>{alertMessage}</div>
-        )}
-      </form>
-    </div>
-  );
+  if (token) {
+    return <Navigate to="/bookshelf" />;
+  } else {
+    return (
+      <div>
+        <h2>LOGIN PAGE</h2>
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="username">Username</label>
+          <input
+            onChange={handleInputChange}
+            name="username"
+            type="text"
+            value={credentials.username}
+          />
+          <label htmlFor="password">Password</label>
+          <input
+            onChange={handleInputChange}
+            type="password"
+            name="password"
+            value={credentials.password}
+          />
+          <button
+            onClick={(e: FormEvent) => {
+              e.preventDefault();
+              setCredentials({ username: "harry", password: "potter" });
+            }}
+          >
+            fill in correct info
+          </button>
+          <button type="submit">Login</button>
+          {alertMessage && (
+            <div className={`alert alert-${alertType}`}>{alertMessage}</div>
+          )}
+        </form>
+      </div>
+    );
+  }
 };
 export default LoginPage;
