@@ -41,8 +41,15 @@ export const AuthProvider = (props: PropsWithChildren) => {
     } catch (error: AxiosError | any) {
       if (!error.message) {
         return { successful: false, message: "unspecified error" };
+      } else if (error.response.status === 400) {
+        console.log(error);
+        return {
+          successful: false,
+          message: "Error: invalid username or password.",
+        };
       } else {
-        return { successful: false, message: error.message };
+        console.log(error);
+        return { successful: false, message: "Error: " + error.message };
       }
     }
   };
