@@ -61,7 +61,10 @@ export const AuthProvider = (props: PropsWithChildren) => {
     }
   };
   // logout function - clears the auth token
-  const logout = () => {};
+  const logout = () => {
+    setToken("");
+    localStorage.removeItem("token");
+  };
 
   return (
     <AuthContext.Provider value={{ token, login, logout }}>
