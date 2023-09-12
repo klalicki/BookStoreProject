@@ -2,9 +2,10 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import useSWR from "swr";
 import { AuthContext } from "../../contexts/AuthContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 const Book = () => {
   const { token } = useContext(AuthContext);
+  const [book, setBook] = useState({});
   const params = useParams();
   const fetchData = async (url: string) => {
     return axios.get(url, { headers: { Authorization: `Bearer ${token}` } });
@@ -13,14 +14,17 @@ const Book = () => {
     `/api/book/${params.bookID}`,
     fetchData
   );
-  console.log(data);
+  const bookData = data?.data.book;
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error</div>;
+  console.log(bookData);
   return (
-    <div>
-      <h3>Individual Book component</h3>
-      <h2>Book ID: {params.bookID}</h2>
-      {isLoading && <p>Loading...</p>}
-      {error && <p>Error: {error.toString()}</p>}
-    </div>
+    <>
+      <img src={data?.data.book.imageLinks.smallThumbnail} alt="" />
+      <h1>{data?.data.book.title || "No title listed"}</h1>
+      <h2>{data?.data.book.authors.join(", ") || "No authors listed"}</h2>
+    </>
   );
 };
+
 export default Book;
