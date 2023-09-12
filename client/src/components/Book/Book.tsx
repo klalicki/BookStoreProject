@@ -23,6 +23,7 @@ const Book = () => {
       <img src={data?.data.book.imageLinks.smallThumbnail} alt="" />
       <h1>{data?.data.book.title || "No title listed"}</h1>
       <h2>{data?.data.book.authors.join(", ") || "No authors listed"}</h2>
+      <h6>controls to move book to other collections will go here</h6>
     </>
   );
 };

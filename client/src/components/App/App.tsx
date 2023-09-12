@@ -6,6 +6,7 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import Book from "../Book/Book";
 import ErrorPage from "../ErrorPage/ErrorPage";
 import LogoutButton from "../LogoutButton/LogoutButton";
+import Search from "../Search/Search";
 function App() {
   return (
     <div className="App">
@@ -31,7 +32,14 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route path="/search" element={<ProtectedRoute></ProtectedRoute>} />
+          <Route
+            path="/search"
+            element={
+              <ProtectedRoute>
+                <Search />
+              </ProtectedRoute>
+            }
+          />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </main>
