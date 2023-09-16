@@ -1,19 +1,34 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import SearchResults from "../SearchResults/SearchResults";
 import axios from "axios";
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/AuthContext";
+import useSWR from "swr";
 
 const Search = () => {
+  const { token } = useContext(AuthContext);
+
   const [searchParams, setSearchParams] = useSearchParams();
-  console.log(searchParams.get("q"));
+
   let defaultSearch = searchParams.get("q") || "";
   const [searchQuery, setSearchQuery] = useState(defaultSearch);
+  const [books, setBooks] = useState([]);
 
   useEffect(() => {
-    const fetchSearch = async () => {
-      const { data } = await axios.get(`api/book/search/${searchQuery}`);
-      console.log(data);
+    const fetchData = async (query: string) => {
+      try {
+        const { data } = await axios.get(`/api/book/search/${query}`);
+        if (data.status != "complete") {
+          console.log(data);
+        } else {
+          console.log("got books from API");
+          setBooks(data.books);
+        }
+      } catch {}
     };
-    fetchSearch();
+
+    fetchData(searchQuery);
   }, [searchQuery]);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,7 +39,9 @@ const Search = () => {
     <div>
       <h2>Search</h2>
       <input type="text" value={searchQuery} onChange={handleSearch} />
+      <SearchResults books={books} />
     </div>
   );
 };
+
 export default Search;
