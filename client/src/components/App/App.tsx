@@ -1,17 +1,25 @@
 import React from "react";
 import "./App.css";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigation, NavLink } from "react-router-dom";
 import LoginPage from "../Login/LoginPage";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import Book from "../Book/Book";
 import ErrorPage from "../ErrorPage/ErrorPage";
 import LogoutButton from "../LogoutButton/LogoutButton";
 import Search from "../Search/Search";
+import Bookshelf from "../Bookshelf/Bookshelf";
 function App() {
   return (
     <div className="App">
       <header>
-        <LogoutButton />
+        <nav>
+          Bookstore App
+          <ProtectedRoute>
+            <NavLink to="/bookshelf/">Bookshelf</NavLink>
+            <NavLink to="/search/">Search</NavLink>
+            <LogoutButton />
+          </ProtectedRoute>
+        </nav>
       </header>
       <main>
         <Routes>
@@ -19,7 +27,7 @@ function App() {
             path="/bookshelf"
             element={
               <ProtectedRoute>
-                <h2>Bookshelf</h2>
+                <Bookshelf />
               </ProtectedRoute>
             }
           />

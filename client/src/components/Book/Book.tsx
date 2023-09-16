@@ -24,6 +24,12 @@ const Book = () => {
       <h1>{data?.data.book.title || "No title listed"}</h1>
       <h2>{data?.data.book.authors.join(", ") || "No authors listed"}</h2>
       <h6>controls to move book to other collections will go here</h6>
+      <select name="" id="" value={data?.data.book.shelf}>
+        <option value="none">None</option>
+        <option value="currentlyReading">Currently Reading</option>
+        <option value="read">Read</option>
+        <option value="wantToRead">Want To Read</option>
+      </select>
     </>
   );
 };
