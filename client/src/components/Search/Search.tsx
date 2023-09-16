@@ -14,21 +14,30 @@ const Search = () => {
   let defaultSearch = searchParams.get("q") || "";
   const [searchQuery, setSearchQuery] = useState(defaultSearch);
   const [books, setBooks] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async (query: string) => {
+      if (query === "") {
+        return;
+      }
       try {
+        setIsLoading(true);
         const { data } = await axios.get(`/api/book/search/${query}`);
         if (data.status != "complete") {
           console.log(data);
         } else {
           console.log("got books from API");
           setBooks(data.books);
+          setIsLoading(false);
         }
-      } catch {}
+      } catch (error) {
+        console.log(error);
+      }
     };
-
-    fetchData(searchQuery);
+    if (searchQuery !== "") {
+      fetchData(searchQuery);
+    }
   }, [searchQuery]);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,7 +48,7 @@ const Search = () => {
     <div>
       <h2>Search</h2>
       <input type="text" value={searchQuery} onChange={handleSearch} />
-      <SearchResults books={books} />
+      {!isLoading && <SearchResults books={books} />}
     </div>
   );
 };
