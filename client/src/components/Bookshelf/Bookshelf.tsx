@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import BookThumbnail from "../BookThumbnail/BookThumbnail";
 import axios from "axios";
 import BookControls from "../BookControls/BookControls";
+import BookList from "../BookList/BookList";
 const Bookshelf = () => {
   const { token } = useContext(AuthContext);
   const [bookshelves, setBookshelves] = useState({
@@ -29,19 +30,15 @@ const Bookshelf = () => {
   return (
     <div>
       <h2>Bookshelf</h2>
-      <div>
-        {bookshelves.currentlyReading.map((book: any) => {
-          return (
-            <BookThumbnail key={book.id} book={book}>
-              <BookControls
-                bookID={book.id}
-                shelfID={book.shelf}
-                setBookshelves={setBookshelves}
-              />
-            </BookThumbnail>
-          );
-        })}
-      </div>
+      <h3>Want To Read</h3>
+      <BookList list={bookshelves.wantToRead} setBookshelves={setBookshelves} />
+      <h3>Currently Reading</h3>
+      <BookList
+        list={bookshelves.currentlyReading}
+        setBookshelves={setBookshelves}
+      />
+      <h3>Read</h3>
+      <BookList list={bookshelves.read} setBookshelves={setBookshelves} />
     </div>
   );
 };
