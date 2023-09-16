@@ -32,7 +32,7 @@ const Bookshelf = () => {
       <div>
         {bookshelves.currentlyReading.map((book: any) => {
           return (
-            <BookThumbnail book={book}>
+            <BookThumbnail key={book.id} book={book}>
               <BookControls
                 bookID={book.id}
                 shelfID={book.shelf}

@@ -19,14 +19,22 @@ const BookControls = ({
   };
   const changeShelf = async (newShelf: string) => {
     try {
-      const { data } = await axios.put(`/api/bookshelf/${bookID}/${newShelf}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      console.log(`/api/bookshelf/${bookID}/${newShelf}`);
+      const { data } = await axios.put(
+        `/api/bookshelf/${bookID}/${newShelf}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
       if (setBookshelves) {
         setBookshelves(data.books);
       }
     } catch (error) {
-      console.log("error");
+      console.log("error:" + error);
     }
   };
   const deleteBook = async () => {
