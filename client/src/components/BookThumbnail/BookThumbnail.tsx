@@ -5,20 +5,23 @@ const BookThumbnail = ({ book, children }: { book: any; children?: any }) => {
     imageUrl = book.imageLinks.thumbnail;
   }
   return (
-    <article>
-      <Link to={`/book/${book.id}`}>Link</Link>
-      {book.title && <h2>{book.title}</h2>}
-      {book.subtitle && <h3>{book.subtitle}</h3>}
-      {book.authors && (
-        <p>
-          {book.authors.length > 1 ? "Authors: " : "Author: "}
-          {book.authors.join(", ")}
-        </p>
-      )}
+    <article className="book-thumbnail">
+      <Link to={`/book/${book.id}`}>
+        {" "}
+        <img src={imageUrl} alt={`book cover of ${book.title}`} />
+      </Link>
+      <section className="description">
+        {book.title && <h2>{book.title}</h2>}
+        {book.subtitle && <h3>{book.subtitle}</h3>}
+        {book.authors && (
+          <p>
+            {book.authors.length > 1 ? "Authors: " : "Author: "}
+            {book.authors.join(", ")}
+          </p>
+        )}
 
-      <img src={imageUrl} alt={`book cover of ${book.title}`} />
-
-      {children}
+        {children}
+      </section>
     </article>
   );
 };
