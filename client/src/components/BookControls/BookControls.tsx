@@ -6,10 +6,12 @@ const BookControls = ({
   bookID,
   shelfID,
   setBookshelves,
+  showDelete,
 }: {
   bookID: string;
   shelfID: string;
   setBookshelves?: Function;
+  showDelete?: boolean;
 }) => {
   const { token } = useContext(AuthContext);
   const [shelf, setShelf] = useState(shelfID);
@@ -55,7 +57,7 @@ const BookControls = ({
         <option value="read">Read</option>
         <option value="wantToRead">Want To Read</option>
       </select>
-      <button onClick={() => deleteBook()}>Delete</button>
+      {showDelete && <button onClick={() => deleteBook()}>Delete</button>}
     </div>
   );
 };

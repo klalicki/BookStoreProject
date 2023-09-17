@@ -1,5 +1,9 @@
 import { Link } from "react-router-dom";
 const BookThumbnail = ({ book, children }: { book: any; children?: any }) => {
+  let imageUrl = "";
+  if (book.imageLinks) {
+    imageUrl = book.imageLinks.thumbnail;
+  }
   return (
     <article>
       <Link to={`/book/${book.id}`}>Link</Link>
@@ -11,6 +15,8 @@ const BookThumbnail = ({ book, children }: { book: any; children?: any }) => {
           {book.authors.join(", ")}
         </p>
       )}
+
+      <img src={imageUrl} alt={`book cover of ${book.title}`} />
 
       {children}
     </article>

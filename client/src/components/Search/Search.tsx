@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import SearchResults from "../SearchResults/SearchResults";
+
 import axios from "axios";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import useSWR from "swr";
+import BookList from "../BookList/BookList";
 
 const Search = () => {
   const { token } = useContext(AuthContext);
@@ -48,7 +49,7 @@ const Search = () => {
     <div>
       <h2>Search</h2>
       <input type="text" value={searchQuery} onChange={handleSearch} />
-      {!isLoading && <SearchResults books={books} />}
+      {!isLoading && <BookList list={books} showDelete={false} />}
     </div>
   );
 };

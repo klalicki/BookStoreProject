@@ -31,14 +31,23 @@ const Bookshelf = () => {
     <div>
       <h2>Bookshelf</h2>
       <h3>Want To Read</h3>
-      <BookList list={bookshelves.wantToRead} setBookshelves={setBookshelves} />
+      <BookList
+        list={bookshelves.wantToRead}
+        setBookshelves={setBookshelves}
+        showDelete={true}
+      />
       <h3>Currently Reading</h3>
       <BookList
         list={bookshelves.currentlyReading}
         setBookshelves={setBookshelves}
+        showDelete={true}
       />
       <h3>Read</h3>
-      <BookList list={bookshelves.read} setBookshelves={setBookshelves} />
+      <BookList
+        list={bookshelves.read}
+        setBookshelves={setBookshelves}
+        showDelete={true}
+      />
     </div>
   );
 };

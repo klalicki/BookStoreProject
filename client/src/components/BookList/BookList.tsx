@@ -4,9 +4,11 @@ import BookThumbnail from "../BookThumbnail/BookThumbnail";
 const BookList = ({
   list,
   setBookshelves,
+  showDelete,
 }: {
   list: Array<any>;
   setBookshelves?: Function;
+  showDelete?: boolean;
 }) => {
   return (
     <div>
@@ -17,6 +19,7 @@ const BookList = ({
               bookID={book.id}
               shelfID={book.shelf}
               setBookshelves={setBookshelves}
+              showDelete={showDelete}
             />
           </BookThumbnail>
         );
