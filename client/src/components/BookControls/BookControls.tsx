@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 const BookControls = ({
@@ -13,7 +13,7 @@ const BookControls = ({
   setBookshelves?: Function;
   showDelete?: boolean;
 }) => {
-  const { token } = useContext(AuthContext);
+  const { token, logout } = useContext(AuthContext);
   const [shelf, setShelf] = useState(shelfID);
   const handleShelfSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setShelf(e.target.value);
@@ -21,7 +21,6 @@ const BookControls = ({
   };
   const changeShelf = async (newShelf: string) => {
     try {
-      console.log(`/api/bookshelf/${bookID}/${newShelf}`);
       const { data } = await axios.put(
         `/api/bookshelf/${bookID}/${newShelf}`,
         {},
@@ -35,8 +34,11 @@ const BookControls = ({
       if (setBookshelves) {
         setBookshelves(data.books);
       }
-    } catch (error) {
-      console.log("error:" + error);
+    } catch (error: any | AxiosError) {
+      if (error.response.status == 401) {
+        console.log("auth error");
+        //  add code to log out user if token has expired
+      }
     }
   };
   const deleteBook = async () => {
@@ -47,7 +49,12 @@ const BookControls = ({
       if (setBookshelves) {
         setBookshelves(data.books);
       }
-    } catch (error) {}
+    } catch (error: any | AxiosError) {
+      if (error.response.status == 401) {
+        console.log("auth error");
+        //  add code to log out user if token has expired
+      }
+    }
   };
   return (
     <div>
