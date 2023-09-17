@@ -57,7 +57,7 @@ const BookControls = ({
         <option value="read">Read</option>
         <option value="wantToRead">Want To Read</option>
       </select>
-      {showDelete && <button onClick={() => deleteBook()}>Delete</button>}
+      {showDelete && <button onClick={() => deleteBook()}>Remove</button>}
     </div>
   );
 };

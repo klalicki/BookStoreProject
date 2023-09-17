@@ -18,6 +18,7 @@ const Search = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    console.log("fetching search from server");
     const fetchData = async (query: string) => {
       if (query === "") {
         return;
