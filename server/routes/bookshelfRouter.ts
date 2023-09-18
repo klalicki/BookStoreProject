@@ -32,7 +32,9 @@ router
       return res.send({ books: bookshelf });
     } catch (err) {
       axios
-        .get(`https://www.googleapis.com/books/v1/volumes/${bookId}`)
+        .get(
+          `https://www.googleapis.com/books/v1/volumes/${bookId}?key=${process.env.API_KEY}`
+        )
         .then((response) => {
           const { id, volumeInfo } = response.data;
           // @ts-ignore
