@@ -12,18 +12,22 @@ const BookList = ({
 }) => {
   return (
     <div>
-      {list.map((book: any) => {
-        return (
-          <BookThumbnail key={book.id} book={book}>
-            <BookControls
-              bookID={book.id}
-              shelfID={book.shelf}
-              setBookshelves={setBookshelves}
-              showDelete={showDelete}
-            />
-          </BookThumbnail>
-        );
-      })}
+      <ul className="book-list">
+        {list.map((book: any) => {
+          return (
+            <li key={book.id}>
+              <BookThumbnail book={book}>
+                <BookControls
+                  bookID={book.id}
+                  shelfID={book.shelf}
+                  setBookshelves={setBookshelves}
+                  showDelete={showDelete}
+                />
+              </BookThumbnail>
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 };
