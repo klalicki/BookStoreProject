@@ -31,8 +31,7 @@ router
           ...{ description },
           ...(shelf && { shelf }),
         };
-        console.log("sending");
-        console.log(book);
+
         return res.send({ book });
       })
       .catch((err) => {
