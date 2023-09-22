@@ -15,14 +15,15 @@ const Search = () => {
 
   const { token } = useContext(AuthContext);
 
-  const fetchData = async (url: string) => {
-    return axios.get(url, { headers: { Authorization: `Bearer ${token}` } });
+  const fetchData = async (bookID: string) => {
+    return axios.get(`/api/book/search/${bookID}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
   };
-  const { data, error, isLoading } = useSWR(
-    `/api/book/search/${searchQuery}`,
-    fetchData,
-    { revalidateOnFocus: false, revalidateIfStale: false }
-  );
+  const { data, error, isLoading } = useSWR(searchQuery, fetchData, {
+    revalidateOnFocus: false,
+    revalidateIfStale: false,
+  });
   // console.log(data?.data);
   useEffect(() => {
     setBooks(data?.data.books);

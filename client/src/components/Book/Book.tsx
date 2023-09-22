@@ -16,6 +16,7 @@ const Book = () => {
     fetchData
   );
   const book = data?.data.book;
+  console.log(book);
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error</div>;
   return (
@@ -54,7 +55,7 @@ const Book = () => {
         </li>
       </ul>
 
-      <BookControls bookID={book.id} />
+      <BookControls bookID={book.id} shelfID={book.shelf} />
     </article>
   );
 };
