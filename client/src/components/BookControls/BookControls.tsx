@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import { CountContext } from "../../contexts/CountContext";
@@ -58,7 +58,7 @@ const BookControls = ({
       if (setBookshelves) {
         setBookshelves(data.books);
       }
-    } catch (error: any | AxiosError) {
+    } catch (error: any | import("axios").AxiosError) {
       if (error.response.status === 401) {
         logout();
       }
@@ -76,7 +76,7 @@ const BookControls = ({
       if (setBookshelves) {
         setBookshelves(data.books);
       }
-    } catch (error: any | AxiosError) {
+    } catch (error: any | import("axios").AxiosError) {
       if (error.response.status === 401) {
         logout();
       }

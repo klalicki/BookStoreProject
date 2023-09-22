@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import { useEffect } from "react";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import BookList from "../BookList/BookList";
 import { CountContext } from "../../contexts/CountContext";
 import useSWR from "swr";
@@ -43,8 +43,7 @@ const Bookshelf = () => {
       setCount(sumShelves(data.data.books));
       setBookshelves(data?.data.books);
     }
-  }, [data]);
-
+  }, [data, error, logout, setCount]);
 
   return (
     <div className="bookshelf-container">

@@ -1,4 +1,4 @@
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import { PropsWithChildren, createContext, useState } from "react";
 
 type AuthContextType = {
@@ -6,10 +6,7 @@ type AuthContextType = {
   login: Function;
   logout: Function;
 };
-type loginReturnType = {
-  successful: boolean;
-  message: string;
-};
+
 const defaultAuthContext: AuthContextType = {
   token: "",
   login: () => {},
@@ -44,7 +41,7 @@ export const AuthProvider = (props: PropsWithChildren) => {
         localStorage.setItem("token", data.data.token);
         return { successful: true, message: "success" };
       }
-    } catch (error: AxiosError | any) {
+    } catch (error: import("axios").AxiosError | any) {
       if (!error.message) {
         return { successful: false, message: "unspecified error" };
       } else if (error.response.status === 401) {

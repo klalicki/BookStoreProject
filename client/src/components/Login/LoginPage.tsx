@@ -15,13 +15,13 @@ const LoginPage = () => {
     password: "",
   });
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setCredentials({
       ...credentials,
       [event.target.name]: event.target.value,
     });
   };
-  const handleSubmit = async (event: React.FormEvent) => {
+  const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
     setAlertType("branded");
     setAlertMessage("Logging in...");
