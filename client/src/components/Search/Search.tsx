@@ -15,7 +15,7 @@ const Search = () => {
   let defaultSearch = searchParams.get("q") || "";
   const [searchQuery, setSearchQuery] = useState(defaultSearch);
   const [books, setBooks] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
@@ -24,7 +24,6 @@ const Search = () => {
         return;
       }
       try {
-        setIsLoading(true);
         const { data } = await axios.get(`/api/book/search/${query}`, {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -41,11 +40,17 @@ const Search = () => {
       }
     };
     if (searchQuery !== "") {
+      setIsLoading(true);
       fetchData(searchQuery);
     }
   }, [searchQuery]);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value !== "") {
+      setIsLoading(true);
+    } else {
+      setIsLoading(false);
+    }
     setSearchQuery(e.target.value);
     setSearchParams({ q: e.target.value });
   };
