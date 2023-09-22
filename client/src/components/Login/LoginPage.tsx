@@ -59,14 +59,7 @@ const LoginPage = () => {
             name="password"
             value={credentials.password}
           />
-          <button
-            onClick={(e: FormEvent) => {
-              e.preventDefault();
-              setCredentials({ username: "harry", password: "potter" });
-            }}
-          >
-            fill in correct info
-          </button>
+
           <button type="submit">Login</button>
           {alertMessage && (
             <div className={`alert alert-${alertType}`}>{alertMessage}</div>
