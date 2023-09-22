@@ -16,8 +16,8 @@ const Book = () => {
     fetchData
   );
   const book = data?.data.book;
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error</div>;
+  if (isLoading) return <div className="alert alert-branded">Loading...</div>;
+  if (error) return <div className="alert alert-loud">Error</div>;
   return (
     <article className="book-info">
       {book?.imageLinks?.thumbnail ? (
