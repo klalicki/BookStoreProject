@@ -13,14 +13,22 @@
   --color-bg: white;
   --color-accent-bg: #b7fbe2;
 }
-
+.appContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+main {
+  max-width: 800px;
+}
 .topBar {
+  align-self: stretch;
   nav {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
+
     background-color: var(--color-accent-a);
     color: black;
     padding: 0.5rem 2rem;

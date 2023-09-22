@@ -10,7 +10,7 @@ import Search from "../Search/Search";
 import Bookshelf from "../Bookshelf/Bookshelf";
 function App() {
   return (
-    <div className="App">
+    <div className="appContainer">
       <header className="topBar">
         <nav>
           <h2>Bookstore App</h2>
