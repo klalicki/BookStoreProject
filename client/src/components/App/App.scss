@@ -16,14 +16,15 @@
 
 button {
   background-color: var(--color-accent-b);
-  border: none;
+  border: 2px solid var(--color-accent-b);
+
   color: white;
   font-size: 1rem;
   padding: 0.5rem;
   cursor: pointer;
   &:hover {
-    background-color: var(--color-accent-c);
-    color: var(--color-text);
+    background-color: white;
+    color: var(--color-accent-b);
   }
 }
 .appContainer {
@@ -81,11 +82,11 @@ main {
 }
 .book-list-container {
   background-color: var(--color-accent-bg);
-  border: 2px solid var(--color-accent-b);
+  border: 2px solid var(--color-accent-c);
   padding: 0;
   > h3 {
-    background-color: var(--color-accent-b);
-    color: white;
+    background-color: var(--color-accent-c);
+    color: black;
     padding: 0.5rem 1rem;
     margin: 0;
   }
@@ -102,7 +103,7 @@ main {
     background-color: white;
     box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
     // border: 2px solid var(--color-accent-b);
-    padding: 1rem;
+    // padding: 1rem;
   }
 }
 .description {
@@ -112,16 +113,41 @@ main {
 }
 .book-thumbnail {
   display: flex;
+  align-items: center;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: stretch;
   gap: 1rem;
+  img {
+    width: 128px;
+
+    padding: 1rem 0rem 1rem 1rem;
+  }
   .description {
+    padding: 1rem 0rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: stretch;
   }
+  .thumbnail-link {
+    padding: 1rem;
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: black;
+    font-size: 1.5rem;
+    color: var(--color-bg);
+    background-color: var(--color-accent-b);
+    border: 2px solid var(--color-accent-b);
+    &:hover {
+      background-color: white;
+      color: var(--color-accent-b);
+    }
+  }
 }
+
 .book-controls {
   display: flex;
   flex-direction: row;
@@ -173,4 +199,15 @@ main {
 }
 .bold {
   font-weight: bold;
+}
+
+.cover-placeholder {
+  width: 128px;
+  height: 192px;
+  background-color: lightgray;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }

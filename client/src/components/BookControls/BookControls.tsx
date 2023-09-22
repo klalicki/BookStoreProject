@@ -85,7 +85,9 @@ const BookControls = ({
   return (
     <div className="book-controls">
       <div className="book-controls-move">
-        <label htmlFor="shelf-select">Move to shelf: </label>
+        <label htmlFor="shelf-select">
+          {shelf ? "Move to shelf: " : "Add to shelf:"}
+        </label>
         <select
           name=""
           id="shelf-select"

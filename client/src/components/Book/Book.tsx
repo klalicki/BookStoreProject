@@ -15,39 +15,46 @@ const Book = () => {
     `/api/book/${params.bookID}`,
     fetchData
   );
+  const book = data?.data.book;
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error</div>;
   return (
     <article className="book-info">
-      <img src={data?.data.book.imageLinks.thumbnail} alt="" />
-      <h1>{data?.data.book.title || "No title listed"}</h1>
-      <h2>{data?.data.book.authors.join(", ") || "No authors listed"}</h2>
-      <p>{data?.data.book.description || "No description listed"}</p>
+      {book?.imageLinks?.thumbnail ? (
+        <img
+          src={book?.imageLinks?.thumbnail}
+          alt={`book cover of ${book.title}`}
+        />
+      ) : (
+        <div className="cover-placeholder">No Cover Image Available</div>
+      )}
+
+      <h1>{book.title || "No title listed"}</h1>
+      <h2>{book.authors.join(", ") || "No authors listed"}</h2>
+      <p>{book.description || "No description listed"}</p>
       <h4>Categories</h4>
       <ul className="book-categories-list">
-        {(data?.data.book.categories || ["No categories listed"]).map(
-          (item: string) => {
-            return <li key={item}>{item}</li>;
-          }
-        )}
+        {(book.categories || ["No categories listed"]).map((item: string) => {
+          return <li key={item}>{item}</li>;
+        })}
       </ul>
       <h4>Publication Info</h4>
       <ul className="book-pub-info">
         <li>
           <span className="bold">Publisher:</span>{" "}
-          {data?.data.book.publisher || "None listed"}
+          {book.publisher || "None listed"}
         </li>
         <li>
           <span className="bold">Publication Date:</span>{" "}
-          {data?.data.book.publishedDate || "None listed"}
+          {book.publishedDate || "None listed"}
         </li>
         <li>
           <span className="bold">Page Count:</span>{" "}
-          {data?.data.book.pageCount || "None listed"}
+          {book.pageCount || "None listed"}
         </li>
       </ul>
 
-      <BookControls bookID={data?.data.book.id} />
+      <BookControls bookID={book.id} />
     </article>
   );
 };

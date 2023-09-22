@@ -1,14 +1,17 @@
 import { Link } from "react-router-dom";
 const BookThumbnail = ({ book, children }: { book: any; children?: any }) => {
-  let imageUrl = "";
-  if (book.imageLinks) {
-    imageUrl = book.imageLinks.thumbnail;
-  }
+  console.log(book);
   return (
     <article className="book-thumbnail">
       <Link to={`/book/${book.id}`}>
-        {" "}
-        <img src={imageUrl} alt={`book cover of ${book.title}`} />
+        {book?.imageLinks?.thumbnail ? (
+          <img
+            src={book?.imageLinks?.thumbnail}
+            alt={`book cover of ${book.title}`}
+          />
+        ) : (
+          <div className="cover-placeholder">No Cover Image Available</div>
+        )}
       </Link>
       <section className="description">
         <div className="description-text">
@@ -24,6 +27,9 @@ const BookThumbnail = ({ book, children }: { book: any; children?: any }) => {
 
         {children}
       </section>
+      <Link className="thumbnail-link" to={`/book/${book.id}`}>
+        {">"}
+      </Link>
     </article>
   );
 };

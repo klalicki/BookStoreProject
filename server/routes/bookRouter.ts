@@ -21,8 +21,9 @@ router
       .then((response) => {
         // @ts-ignore
         const shelf = Bookshelves.findShelfForBook(userId, bookId);
+
         const description = stripHtml(
-          response.data.volumeInfo?.description
+          response.data.volumeInfo?.description || ""
         ).result;
         const book = {
           id: bookId,
@@ -30,6 +31,8 @@ router
           ...{ description },
           ...(shelf && { shelf }),
         };
+        console.log("sending");
+        console.log(book);
         return res.send({ book });
       })
       .catch((err) => {
