@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import axios, { AxiosError } from "axios";
 import BookList from "../BookList/BookList";
 import { CountContext } from "../../contexts/CountContext";
+import useSWR from "swr";
 type BookObj = {
   id: string;
 };
@@ -27,36 +28,30 @@ const Bookshelf = () => {
     wantToRead: [],
     read: [],
   });
-  const [isReady, setIsReady] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
 
+  const fetchData = async (url: string) => {
+    return axios.get(url, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  };
+  const { data, error, isLoading } = useSWR(`/api/bookshelf`, fetchData);
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data } = await axios.get("/api/bookshelf", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        if (data.books) {
-          setCount(sumShelves(data.books));
-        }
-        setBookshelves(data.books);
-        setIsReady(true);
-        setIsLoading(false);
-      } catch (error: any | AxiosError) {
-        if (error.response.status === 401) {
-          //  TODO: notify the user that the token has expired
-          logout();
-        }
-      }
-    };
-    fetchData();
-  }, []);
+    if (error && error.response.status === 401) {
+      logout();
+    }
+    if (data) {
+      setCount(sumShelves(data.data.books));
+      setBookshelves(data?.data.books);
+    }
+  }, [data]);
+
 
   return (
     <div className="bookshelf-container">
       <h2>Bookshelf</h2>
-      {isLoading ? <h3>Loading...</h3> : null}
-      {isReady ? (
+      {isLoading ? <div className="alert alert-branded">Loading...</div> : null}
+      {error && <div className="alert alert-loud">Error: {error.message}</div>}
+      {!isLoading && !error ? (
         <>
           <BookList
             title={"Want To Read"}
