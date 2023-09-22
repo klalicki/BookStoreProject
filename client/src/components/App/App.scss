@@ -221,11 +221,14 @@ main {
 }
 
 .bookshelf-counter {
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   color: var(--color-accent-a);
   background-color: black;
-  padding: 0.125rem 0.25rem;
-  border-radius: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 1rem;
+  margin-left: 0.125rem;
+  font-weight: bold;
+  letter-spacing: 0.1em;
 }
 
 .book-categories-list {

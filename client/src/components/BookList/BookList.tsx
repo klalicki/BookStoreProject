@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import BookControls from "../BookControls/BookControls";
 import BookThumbnail from "../BookThumbnail/BookThumbnail";
 
@@ -16,20 +17,27 @@ const BookList = ({
     <div className="book-list-container">
       <h3>{title}</h3>
       <ul className="book-list">
-        {list.map((book: any) => {
-          return (
-            <li key={book.id}>
-              <BookThumbnail book={book}>
-                <BookControls
-                  bookID={book.id}
-                  shelfID={book.shelf}
-                  setBookshelves={setBookshelves}
-                  showDelete={showDelete}
-                />
-              </BookThumbnail>
-            </li>
-          );
-        })}
+        {list.length > 0 ? (
+          list.map((book: any) => {
+            return (
+              <li key={book.id}>
+                <BookThumbnail book={book}>
+                  <BookControls
+                    bookID={book.id}
+                    shelfID={book.shelf}
+                    setBookshelves={setBookshelves}
+                    showDelete={showDelete}
+                  />
+                </BookThumbnail>
+              </li>
+            );
+          })
+        ) : (
+          <div>
+            There's nothing here! <Link to="/search/">Search</Link> for books to
+            add.
+          </div>
+        )}
       </ul>
     </div>
   );
