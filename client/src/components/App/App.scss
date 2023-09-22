@@ -277,3 +277,36 @@ main {
   background-color: var(--color-accent-c);
   color: black;
 }
+
+.login-page {
+  max-width: 400px;
+  width: 100%;
+  h2 {
+    margin-top: 0;
+  }
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex-grow: 0;
+  flex-shrink: 1;
+
+  border: 2px solid var(--color-accent-c);
+  padding: 2rem;
+}
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  div.form-controls {
+    display: flex;
+    flex-direction: column;
+    input {
+      padding: 0.25rem;
+      font-size: 1.25rem;
+    }
+    label {
+      margin-top: 0.5rem;
+    }
+  }
+}

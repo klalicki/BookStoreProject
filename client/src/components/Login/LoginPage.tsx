@@ -42,10 +42,10 @@ const LoginPage = () => {
     return <Navigate to="/bookshelf" />;
   } else {
     return (
-      <div>
-        <h2>LOGIN PAGE</h2>
-        <form onSubmit={handleSubmit}>
-          <div>
+      <div className="login-page">
+        <h2>Log in to Bookstor.</h2>
+        <form className="login-form" onSubmit={handleSubmit}>
+          <div className="form-controls">
             <label htmlFor="username">Username</label>
             <input
               onChange={handleInputChange}
@@ -53,8 +53,7 @@ const LoginPage = () => {
               type="text"
               value={credentials.username}
             />
-          </div>
-          <div>
+
             <label htmlFor="password">Password</label>
             <input
               onChange={handleInputChange}
