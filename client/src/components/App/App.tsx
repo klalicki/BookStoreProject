@@ -8,7 +8,11 @@ import ErrorPage from "../ErrorPage/ErrorPage";
 import LogoutButton from "../LogoutButton/LogoutButton";
 import Search from "../Search/Search";
 import Bookshelf from "../Bookshelf/Bookshelf";
+import { CountContext } from "../../contexts/CountContext";
+import { useContext } from "react";
+
 function App() {
+  const { count } = useContext(CountContext);
   return (
     <div className="appContainer">
       <header className="topBar">
@@ -16,7 +20,9 @@ function App() {
           <h2>Bookstore App</h2>
 
           <ProtectedRoute>
-            <NavLink to="/bookshelf/">Bookshelf</NavLink>
+            <NavLink to="/bookshelf/">
+              Bookshelf <span className={"bookshelf-counter"}>{count}</span>
+            </NavLink>
             <NavLink to="/search/">Search</NavLink>
             <LogoutButton />
           </ProtectedRoute>

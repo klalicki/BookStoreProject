@@ -13,7 +13,7 @@ const BookList = ({
   title?: string;
 }) => {
   return (
-    <div>
+    <div className="book-list-container">
       <h3>{title}</h3>
       <ul className="book-list">
         {list.map((book: any) => {

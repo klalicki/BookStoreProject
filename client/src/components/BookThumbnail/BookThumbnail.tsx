@@ -11,14 +11,16 @@ const BookThumbnail = ({ book, children }: { book: any; children?: any }) => {
         <img src={imageUrl} alt={`book cover of ${book.title}`} />
       </Link>
       <section className="description">
-        {book.title && <h2>{book.title}</h2>}
-        {book.subtitle && <h3>{book.subtitle}</h3>}
-        {book.authors && (
-          <p>
-            {book.authors.length > 1 ? "Authors: " : "Author: "}
-            {book.authors.join(", ")}
-          </p>
-        )}
+        <div className="description-text">
+          {book.title && <h2>{book.title}</h2>}
+          {book.subtitle && <h3>{book.subtitle}</h3>}
+          {book.authors && (
+            <p>
+              {book.authors.length > 1 ? "Authors: " : "Author: "}
+              {book.authors.join(", ")}
+            </p>
+          )}
+        </div>
 
         {children}
       </section>

@@ -1,12 +1,27 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import { useEffect } from "react";
-import BookThumbnail from "../BookThumbnail/BookThumbnail";
 import axios, { AxiosError } from "axios";
-import BookControls from "../BookControls/BookControls";
 import BookList from "../BookList/BookList";
+import { CountContext } from "../../contexts/CountContext";
+type BookObj = {
+  id: string;
+};
+type BookListsObj = {
+  read: Array<BookObj>;
+  wantToRead: Array<BookObj>;
+  currentlyReading: Array<BookObj>;
+};
+const sumShelves = (bookObj: BookListsObj) => {
+  return (
+    bookObj.read.length +
+    bookObj.wantToRead.length +
+    bookObj.currentlyReading.length
+  );
+};
 const Bookshelf = () => {
   const { token, logout } = useContext(AuthContext);
+  const { setCount } = useContext(CountContext);
   const [bookshelves, setBookshelves] = useState({
     currentlyReading: [],
     wantToRead: [],
@@ -21,12 +36,15 @@ const Bookshelf = () => {
         const { data } = await axios.get("/api/bookshelf", {
           headers: { Authorization: `Bearer ${token}` },
         });
+        if (data.books) {
+          setCount(sumShelves(data.books));
+        }
         setBookshelves(data.books);
         setIsReady(true);
         setIsLoading(false);
       } catch (error: any | AxiosError) {
         if (error.response.status == 401) {
-        //  TODO: notify the user that the token has expired
+          //  TODO: notify the user that the token has expired
           logout();
         }
       }

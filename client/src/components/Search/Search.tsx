@@ -25,8 +25,13 @@ const Search = () => {
       }
       try {
         setIsLoading(true);
-        const { data } = await axios.get(`/api/book/search/${query}`);
-        if (data.status != "complete") {
+        const { data } = await axios.get(`/api/book/search/${query}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        });
+        if (data.status !== "complete") {
           console.log(data);
         } else {
           console.log("got books from API");
@@ -47,7 +52,7 @@ const Search = () => {
     setSearchParams({ q: e.target.value });
   };
   return (
-    <div>
+    <div className="search">
       <h2>Search</h2>
       <input type="text" value={searchQuery} onChange={handleSearch} />
       {!isLoading && (

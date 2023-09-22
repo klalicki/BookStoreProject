@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./components/App/App";
 import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
+import { CountContextProvider } from "./contexts/CountContext";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -11,9 +12,11 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <AuthProvider>
-        <App />
-      </AuthProvider>
+      <CountContextProvider>
+        <AuthProvider>
+          <App />
+        </AuthProvider>
+      </CountContextProvider>
     </BrowserRouter>
   </React.StrictMode>
 );
