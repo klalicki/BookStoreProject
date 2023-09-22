@@ -3,7 +3,7 @@ const BookThumbnail = ({ book, children }: { book: any; children?: any }) => {
   console.log(book);
   return (
     <article className="book-thumbnail">
-      <Link to={`/book/${book.id}`}>
+      <Link to={`/book/${book.id}`} className="thumbnail-image-link">
         {book?.imageLinks?.thumbnail ? (
           <img
             src={book?.imageLinks?.thumbnail}
