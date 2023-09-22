@@ -23,7 +23,7 @@ const LoginPage = () => {
   };
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    setAlertType("info");
+    setAlertType("branded");
     setAlertMessage("Logging in...");
     // try logging in with credentials
     const status = await login(credentials.username, credentials.password);
@@ -34,7 +34,7 @@ const LoginPage = () => {
       navigate("/bookshelf");
     } else {
       // login was not successful - display an error message
-      setAlertType("danger");
+      setAlertType("loud");
       setAlertMessage(status.message);
     }
   };

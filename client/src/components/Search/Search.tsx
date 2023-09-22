@@ -16,6 +16,7 @@ const Search = () => {
   const [searchQuery, setSearchQuery] = useState(defaultSearch);
   const [books, setBooks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     const fetchData = async (query: string) => {
@@ -36,6 +37,7 @@ const Search = () => {
           setIsLoading(false);
         }
       } catch (error) {
+        setIsError(true);
       }
     };
     if (searchQuery !== "") {
@@ -51,6 +53,7 @@ const Search = () => {
     <div className="search">
       <h2>Search</h2>
       <input type="text" value={searchQuery} onChange={handleSearch} />
+      {isLoading && <div className="alert alert-branded">Loading...</div>}
       {!isLoading && (
         <BookList title={"Search Results"} list={books} showDelete={false} />
       )}
