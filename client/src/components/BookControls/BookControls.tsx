@@ -9,7 +9,7 @@ const BookControls = ({
   showDelete,
 }: {
   bookID: string;
-  shelfID: string;
+  shelfID?: string;
   setBookshelves?: Function;
   showDelete?: boolean;
 }) => {
@@ -36,8 +36,7 @@ const BookControls = ({
       }
     } catch (error: any | AxiosError) {
       if (error.response.status == 401) {
-        console.log("auth error");
-        //  add code to log out user if token has expired
+        logout();
       }
     }
   };
@@ -51,18 +50,23 @@ const BookControls = ({
       }
     } catch (error: any | AxiosError) {
       if (error.response.status == 401) {
-        console.log("auth error");
-        //  add code to log out user if token has expired
+        logout();
       }
     }
   };
   return (
     <div>
-      <select name="" id="" value={shelf} onChange={handleShelfSelect}>
+      <label htmlFor="shelf-select">Move to shelf: </label>
+      <select
+        name=""
+        id="shelf-select"
+        value={shelf}
+        onChange={handleShelfSelect}
+      >
         <option value="none">None</option>
+        <option value="wantToRead">Want To Read</option>
         <option value="currentlyReading">Currently Reading</option>
         <option value="read">Read</option>
-        <option value="wantToRead">Want To Read</option>
       </select>
       {showDelete && <button onClick={() => deleteBook()}>Remove</button>}
     </div>

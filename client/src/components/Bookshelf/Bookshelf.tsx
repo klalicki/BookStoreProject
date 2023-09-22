@@ -2,16 +2,18 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import { useEffect } from "react";
 import BookThumbnail from "../BookThumbnail/BookThumbnail";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import BookControls from "../BookControls/BookControls";
 import BookList from "../BookList/BookList";
 const Bookshelf = () => {
-  const { token } = useContext(AuthContext);
+  const { token, logout } = useContext(AuthContext);
   const [bookshelves, setBookshelves] = useState({
     currentlyReading: [],
     wantToRead: [],
     read: [],
   });
+  const [isReady, setIsReady] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,34 +22,45 @@ const Bookshelf = () => {
           headers: { Authorization: `Bearer ${token}` },
         });
         setBookshelves(data.books);
-      } catch (error) {
-        console.log(error);
+        setIsReady(true);
+        setIsLoading(false);
+      } catch (error: any | AxiosError) {
+        if (error.response.status == 401) {
+        //  TODO: notify the user that the token has expired
+          logout();
+        }
       }
     };
     fetchData();
   }, []);
 
   return (
-    <div>
+    <div className="bookshelf-container">
       <h2>Bookshelf</h2>
-      <h3>Want To Read</h3>
-      <BookList
-        list={bookshelves.wantToRead}
-        setBookshelves={setBookshelves}
-        showDelete={true}
-      />
-      <h3>Currently Reading</h3>
-      <BookList
-        list={bookshelves.currentlyReading}
-        setBookshelves={setBookshelves}
-        showDelete={true}
-      />
-      <h3>Read</h3>
-      <BookList
-        list={bookshelves.read}
-        setBookshelves={setBookshelves}
-        showDelete={true}
-      />
+      {isLoading ? <h3>Loading...</h3> : null}
+      {isReady ? (
+        <>
+          <BookList
+            title={"Want To Read"}
+            list={bookshelves.wantToRead}
+            setBookshelves={setBookshelves}
+            showDelete={true}
+          />
+          <BookList
+            title={"Currently Reading"}
+            list={bookshelves.currentlyReading}
+            setBookshelves={setBookshelves}
+            showDelete={true}
+          />
+
+          <BookList
+            title={"Read"}
+            list={bookshelves.read}
+            setBookshelves={setBookshelves}
+            showDelete={true}
+          />
+        </>
+      ) : null}
     </div>
   );
 };

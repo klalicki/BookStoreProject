@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import useSWR from "swr";
 import { AuthContext } from "../../contexts/AuthContext";
 import { useContext, useState } from "react";
+import BookControls from "../BookControls/BookControls";
 const Book = () => {
   const { token } = useContext(AuthContext);
   const [book, setBook] = useState({});
@@ -20,16 +21,10 @@ const Book = () => {
   console.log(bookData);
   return (
     <>
-      <img src={data?.data.book.imageLinks.smallThumbnail} alt="" />
+      <img src={data?.data.book.imageLinks.thumbnail} alt="" />
       <h1>{data?.data.book.title || "No title listed"}</h1>
       <h2>{data?.data.book.authors.join(", ") || "No authors listed"}</h2>
-      <h6>controls to move book to other collections will go here</h6>
-      <select name="" id="" value={data?.data.book.shelf}>
-        <option value="none">None</option>
-        <option value="currentlyReading">Currently Reading</option>
-        <option value="read">Read</option>
-        <option value="wantToRead">Want To Read</option>
-      </select>
+      <BookControls bookID={data?.data.book.id} />
     </>
   );
 };

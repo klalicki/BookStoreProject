@@ -5,13 +5,16 @@ const BookList = ({
   list,
   setBookshelves,
   showDelete,
+  title,
 }: {
   list: Array<any>;
   setBookshelves?: Function;
   showDelete?: boolean;
+  title?: string;
 }) => {
   return (
     <div>
+      <h3>{title}</h3>
       <ul className="book-list">
         {list.map((book: any) => {
           return (

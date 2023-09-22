@@ -1,5 +1,5 @@
 import React from "react";
-import "./App.css";
+import "./App.scss";
 import { Route, Routes, Navigation, NavLink } from "react-router-dom";
 import LoginPage from "../Login/LoginPage";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
@@ -11,9 +11,10 @@ import Bookshelf from "../Bookshelf/Bookshelf";
 function App() {
   return (
     <div className="App">
-      <header>
+      <header className="topBar">
         <nav>
-          Bookstore App
+          <h2>Bookstore App</h2>
+
           <ProtectedRoute>
             <NavLink to="/bookshelf/">Bookshelf</NavLink>
             <NavLink to="/search/">Search</NavLink>

@@ -50,7 +50,9 @@ const Search = () => {
     <div>
       <h2>Search</h2>
       <input type="text" value={searchQuery} onChange={handleSearch} />
-      {!isLoading && <BookList list={books} showDelete={false} />}
+      {!isLoading && (
+        <BookList title={"Search Results"} list={books} showDelete={false} />
+      )}
     </div>
   );
 };
