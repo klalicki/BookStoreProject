@@ -43,7 +43,7 @@ const Bookshelf = () => {
         setIsReady(true);
         setIsLoading(false);
       } catch (error: any | AxiosError) {
-        if (error.response.status == 401) {
+        if (error.response.status === 401) {
           //  TODO: notify the user that the token has expired
           logout();
         }

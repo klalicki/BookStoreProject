@@ -28,7 +28,6 @@ export const AuthProvider = (props: PropsWithChildren) => {
   const [token, setToken] = useState(startingToken);
   // login function - takes a username and password, and attempts to log in to the backend
   const login = async (username: string, password: string) => {
-    console.log("login function");
     try {
       const data = await axios.post("/api/signin", {
         username: username,
@@ -48,14 +47,17 @@ export const AuthProvider = (props: PropsWithChildren) => {
     } catch (error: AxiosError | any) {
       if (!error.message) {
         return { successful: false, message: "unspecified error" };
-      } else if (error.response.status === 400) {
-        console.log(error);
+      } else if (error.response.status === 401) {
         return {
           successful: false,
           message: "Error: invalid username or password.",
         };
+      } else if (error.response.status === 400) {
+        return {
+          successful: false,
+          message: "Error: You must enter a username and password to login.",
+        };
       } else {
-        console.log(error);
         return { successful: false, message: "Error: " + error.message };
       }
     }

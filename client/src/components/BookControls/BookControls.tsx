@@ -59,7 +59,7 @@ const BookControls = ({
         setBookshelves(data.books);
       }
     } catch (error: any | AxiosError) {
-      if (error.response.status == 401) {
+      if (error.response.status === 401) {
         logout();
       }
     }
@@ -77,7 +77,7 @@ const BookControls = ({
         setBookshelves(data.books);
       }
     } catch (error: any | AxiosError) {
-      if (error.response.status == 401) {
+      if (error.response.status === 401) {
         logout();
       }
     }

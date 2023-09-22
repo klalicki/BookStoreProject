@@ -18,7 +18,6 @@ const Search = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    console.log("fetching search from server");
     const fetchData = async (query: string) => {
       if (query === "") {
         return;
@@ -32,14 +31,11 @@ const Search = () => {
           },
         });
         if (data.status !== "complete") {
-          console.log(data);
         } else {
-          console.log("got books from API");
           setBooks(data.books);
           setIsLoading(false);
         }
       } catch (error) {
-        console.log(error);
       }
     };
     if (searchQuery !== "") {

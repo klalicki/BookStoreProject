@@ -28,8 +28,7 @@ const LoginPage = () => {
     // try logging in with credentials
     const status = await login(credentials.username, credentials.password);
     if (status.successful) {
-// load correct bookshelf count from API:
-
+      // load correct bookshelf count from API:
 
       // login was a success, open bookshelf page
       navigate("/bookshelf");

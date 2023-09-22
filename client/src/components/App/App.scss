@@ -150,3 +150,27 @@ main {
   padding: 0.125rem 0.25rem;
   border-radius: 0.25rem;
 }
+
+.book-categories-list {
+  display: flex;
+  padding-left: 0;
+  list-style: none;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  li {
+    background-color: var(--color-accent-bg);
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.5rem;
+  }
+}
+.book-pub-info {
+  list-style: none;
+  padding-left: 0;
+
+  li {
+  }
+}
+.bold {
+  font-weight: bold;
+}
