@@ -45,20 +45,24 @@ const LoginPage = () => {
       <div>
         <h2>LOGIN PAGE</h2>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="username">Username</label>
-          <input
-            onChange={handleInputChange}
-            name="username"
-            type="text"
-            value={credentials.username}
-          />
-          <label htmlFor="password">Password</label>
-          <input
-            onChange={handleInputChange}
-            type="password"
-            name="password"
-            value={credentials.password}
-          />
+          <div>
+            <label htmlFor="username">Username</label>
+            <input
+              onChange={handleInputChange}
+              name="username"
+              type="text"
+              value={credentials.username}
+            />
+          </div>
+          <div>
+            <label htmlFor="password">Password</label>
+            <input
+              onChange={handleInputChange}
+              type="password"
+              name="password"
+              value={credentials.password}
+            />
+          </div>
 
           <button type="submit">Login</button>
           {alertMessage && (
