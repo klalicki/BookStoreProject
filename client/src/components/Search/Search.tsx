@@ -8,49 +8,27 @@ import useSWR from "swr";
 import BookList from "../BookList/BookList";
 
 const Search = () => {
-  const { token } = useContext(AuthContext);
-
   const [searchParams, setSearchParams] = useSearchParams();
-
   let defaultSearch = searchParams.get("q") || "";
   const [searchQuery, setSearchQuery] = useState(defaultSearch);
   const [books, setBooks] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
 
+  const { token } = useContext(AuthContext);
+
+  const fetchData = async (url: string) => {
+    return axios.get(url, { headers: { Authorization: `Bearer ${token}` } });
+  };
+  const { data, error, isLoading } = useSWR(
+    `/api/book/search/${searchQuery}`,
+    fetchData,
+    { revalidateOnFocus: false, revalidateIfStale: false }
+  );
+  // console.log(data?.data);
   useEffect(() => {
-    const fetchData = async (query: string) => {
-      if (query === "") {
-        return;
-      }
-      try {
-        const { data } = await axios.get(`/api/book/search/${query}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        });
-        if (data.status !== "complete") {
-        } else {
-          setBooks(data.books);
-          setIsLoading(false);
-        }
-      } catch (error) {
-        setIsError(true);
-      }
-    };
-    if (searchQuery !== "") {
-      setIsLoading(true);
-      fetchData(searchQuery);
-    }
-  }, [searchQuery]);
+    setBooks(data?.data.books);
+  }, [data]);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value !== "") {
-      setIsLoading(true);
-    } else {
-      setIsLoading(false);
-    }
     setSearchQuery(e.target.value);
     setSearchParams({ q: e.target.value });
   };
@@ -59,7 +37,8 @@ const Search = () => {
       <h2>Search</h2>
       <input type="text" value={searchQuery} onChange={handleSearch} />
       {isLoading && <div className="alert alert-branded">Loading...</div>}
-      {!isLoading && (
+      {error && <div className="alert alert-loud">Error: {error.message}</div>}
+      {!isLoading && books && books.length && (
         <BookList title={"Search Results"} list={books} showDelete={false} />
       )}
     </div>
