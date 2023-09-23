@@ -58,9 +58,11 @@ const BookControls = ({
       if (setBookshelves) {
         setBookshelves(data.books);
       }
-    } catch (error: any | import("axios").AxiosError) {
-      if (error.response.status === 401) {
-        logout();
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (error?.response?.status === 401) {
+          logout();
+        }
       }
     }
   };
@@ -76,9 +78,11 @@ const BookControls = ({
       if (setBookshelves) {
         setBookshelves(data.books);
       }
-    } catch (error: any | import("axios").AxiosError) {
-      if (error.response.status === 401) {
-        logout();
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (error.response?.status === 401) {
+          logout();
+        }
       }
     }
   };
