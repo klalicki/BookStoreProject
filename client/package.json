@@ -31,7 +31,8 @@
   },
   "eslintConfig": {
     "rules": {
-      "no-console": "warn"
+      "no-console": "warn",
+      "@typescript-eslint/no-explicit-any": "warn"
     },
     "extends": [
       "react-app",
