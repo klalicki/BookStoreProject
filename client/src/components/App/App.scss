@@ -74,7 +74,7 @@ main {
 
     background-color: var(--color-accent-a);
     color: black;
-    padding: 0.5rem 2rem;
+    padding: 0.5rem 1rem;
 
     a {
       color: black;
@@ -311,5 +311,21 @@ main {
     label {
       margin-top: 0.5rem;
     }
+  }
+}
+.brand-mobile {
+  background-color: black;
+  color: var(--color-accent-a);
+  display: none;
+  padding: 0.125rem 0.6rem;
+  border-radius: 0.25rem;
+}
+
+@media screen and (max-width: 440px) {
+  .brand-desktop {
+    display: none;
+  }
+  .brand-mobile {
+    display: block;
   }
 }

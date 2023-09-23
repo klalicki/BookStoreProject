@@ -17,7 +17,8 @@ function App() {
     <div className="appContainer">
       <header className="topBar">
         <nav>
-          <h2>Bookstor.</h2>
+          <h2 className="brand-desktop">Bookstor.</h2>
+          <h2 className="brand-mobile">B</h2>
 
           <ProtectedRoute>
             <NavLink to="/bookshelf/">
