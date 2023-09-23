@@ -1,14 +1,17 @@
 import { Link } from "react-router-dom";
 import BookControls from "../BookControls/BookControls";
 import BookThumbnail from "../BookThumbnail/BookThumbnail";
-
+type BookObj = {
+  id: string;
+  shelf: string;
+};
 const BookList = ({
   list,
   setBookshelves,
   showDelete,
   title,
 }: {
-  list: Array<any>;
+  list: Array<BookObj>;
   setBookshelves?: Function;
   showDelete?: boolean;
   title?: string;
@@ -18,7 +21,7 @@ const BookList = ({
       <h3>{title}</h3>
       <ul className="book-list">
         {list.length > 0 ? (
-          list.map((book: any) => {
+          list.map((book: BookObj) => {
             return (
               <li key={book.id}>
                 <BookThumbnail book={book}>

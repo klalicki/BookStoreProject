@@ -1,5 +1,23 @@
+import { PropsWithChildren } from "react";
 import { Link } from "react-router-dom";
-const BookThumbnail = ({ book, children }: { book: any; children?: any }) => {
+type ImageLinksObj = {
+  thumbnail?: string;
+};
+type BookObj = {
+  imageLinks?: ImageLinksObj;
+  id?: string;
+  title?: string;
+  subtitle?: string;
+  authors?: string[];
+};
+
+type BookThumbnailProps = {
+  book: BookObj;
+};
+const BookThumbnail = ({
+  book,
+  children,
+}: PropsWithChildren<BookThumbnailProps>) => {
   return (
     <article className="book-thumbnail">
       <Link to={`/book/${book.id}`} className="thumbnail-image-link">
