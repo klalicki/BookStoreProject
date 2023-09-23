@@ -41,21 +41,23 @@ export const AuthProvider = (props: PropsWithChildren) => {
         localStorage.setItem("token", data.data.token);
         return { successful: true, message: "success" };
       }
-    } catch (error: import("axios").AxiosError | any) {
-      if (!error.message) {
-        return { successful: false, message: "unspecified error" };
-      } else if (error.response.status === 401) {
-        return {
-          successful: false,
-          message: "Error: invalid username or password.",
-        };
-      } else if (error.response.status === 400) {
-        return {
-          successful: false,
-          message: "Error: You must enter a username and password to login.",
-        };
-      } else {
-        return { successful: false, message: "Error: " + error.message };
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (!error.message) {
+          return { successful: false, message: "unspecified error" };
+        } else if (error?.response?.status === 401) {
+          return {
+            successful: false,
+            message: "Error: invalid username or password.",
+          };
+        } else if (error?.response?.status === 400) {
+          return {
+            successful: false,
+            message: "Error: You must enter a username and password to login.",
+          };
+        } else {
+          return { successful: false, message: "Error: " + error.message };
+        }
       }
     }
   };
