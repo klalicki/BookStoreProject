@@ -46,7 +46,7 @@ const LoginPage = () => {
         <h2>Log in to Bookstor.</h2>
         <form className="login-form" onSubmit={handleSubmit}>
           <div className="form-controls">
-            <label htmlFor="username">Username</label>
+            <label htmlFor="username">Username (hint: testuser)</label>
             <input
               onChange={handleInputChange}
               name="username"
@@ -54,7 +54,7 @@ const LoginPage = () => {
               value={credentials.username}
             />
 
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">Password (hint: password)</label>
             <input
               onChange={handleInputChange}
               type="password"

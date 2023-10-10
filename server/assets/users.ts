@@ -8,13 +8,13 @@ import { IUser } from "../models/Users";
 const users: IUser[] = [
   {
     id: "2725",
-    username: "hermione",
-    password: "granger",
+    username: "testuser",
+    password: "password",
   },
   {
     id: "5976",
-    username: "harry",
-    password: "potter",
+    username: "kristoff",
+    password: "lalicki",
   },
 ];
 

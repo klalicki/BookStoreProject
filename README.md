@@ -1,8 +1,7 @@
 # Bookstor.
 
-Currently live (deployed with Render) at [https://kristoff-can-code.onrender.com/](https://kristoff-can-code.onrender.com/).
+Currently live (deployed with Heroku) at [https://bookstor-479a5a9771d0.herokuapp.com/](https://bookstor-479a5a9771d0.herokuapp.com/).
 
-_note: This project is deployed to a free tier account that will automatically pause if inactive. If the site does not load, please wait a few minutes for the deployment platform to build the repository and start the backend service._
 
 ## About the Project
 
@@ -14,8 +13,8 @@ This project is a reading list app, that allows the user to search the Google Bo
 
   | Username | Password |
   | -------- | -------- |
-  | harry    | potter   |
-  | hermione | granger  |
+  | testuser | password |
+  | kristoff | lalicki  |
 
   Once the user is logged in, the app uses a JWT to authenticate requests to the backend API. There are a few other features related to authentication:
 
@@ -30,7 +29,6 @@ This project is a reading list app, that allows the user to search the Google Bo
 - **Book Details**: Users can view more details about a book, including a description, the author, categories, and publication information.
 
 - **Bookshelf**: Users can view their reading lists, which are stored in the backend database. The reading list page allows the user to remove books from the lists, move books between lists, or view a page with more details about the book.
-
 
 ## Tech
 
