@@ -1,6 +1,6 @@
 # Bookstor.
 
-Currently live (deployed with Heroku) at [https://bookstor-479a5a9771d0.herokuapp.com/](https://bookstor-479a5a9771d0.herokuapp.com/).
+Currently live (deployed with Render) at [https://bookstor.onrender.com/](https://bookstor.onrender.com/).
 
 
 ## About the Project
@@ -36,7 +36,7 @@ The frontend of this project is built with React. It uses Axios and SWR to fetch
 
 ## How to Use
 
-This project is currently deployed at [https://bookstor-479a5a9771d0.herokuapp.com/](https://bookstor-479a5a9771d0.herokuapp.com/). You can also run it locally.
+This project is currently deployed at [https://bookstor.onrender.com/](https://bookstor.onrender.com/). You can also run it locally.
 
 There are two ways to run this project locally: with development servers, or with a production build.
 
