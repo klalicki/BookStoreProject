@@ -5,7 +5,7 @@ Currently live (deployed with Render) at [https://bookstor.onrender.com/](https:
 
 ## About the Project
 
-This project is a reading list app, that allows the user to search the Google Books API for books, then add them to a reading list.
+This project is a reading list app, that allows the user to search the Google Books API for books, then add them to a reading list. This was the final project for the CanCode Communities Javascript Frameworks (React) course. I was provided with a prebuilt backend, and was responsible for building the frontend from scratch with React & Typescript.
 
 ### Features:
 
